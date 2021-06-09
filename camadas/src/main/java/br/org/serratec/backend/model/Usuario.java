@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Usuario {
@@ -21,6 +23,10 @@ public class Usuario {
 		// TODO Auto-generated constructor stub
 	}
 
+	@ManyToOne
+	@JoinColumn (name = "id_endereco")
+	private Endereco endereco;
+	
 	public Usuario(Long id, String nome, String email, String perfil, String senha) {
 		super();
 		this.id = id;
@@ -94,6 +100,12 @@ public class Usuario {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Nome:" + nome + "\nEmail:" + email + "\nPerfil:" + perfil ;
+	}
+	
 	
 	
 }

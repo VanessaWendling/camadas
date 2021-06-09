@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.backend.config.MailConfig;
 import br.org.serratec.backend.dto.UsuarioInserirDTO;
 import br.org.serratec.backend.dto.UsuarioMostrarDTO;
 import br.org.serratec.backend.exception.EmailException;
@@ -21,6 +22,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private MailConfig mailConfig;
 	
 	public List<UsuarioMostrarDTO> listar(){
 		List<UsuarioMostrarDTO> usuarioDTOs = new ArrayList<UsuarioMostrarDTO>();
@@ -38,12 +42,14 @@ public class UsuarioService {
 		if(u != null) {
 			throw new EmailException ("Email existente! Insira outro");
 		}
+		
 		Usuario usuario = new Usuario();
 		usuario.setNome(usuarioInserirDTO.getNome());
 		usuario.setEmail(usuarioInserirDTO.getEmail());
 		usuario.setPerfil("Usuário Padrão");
 		usuario.setSenha(bCryptPasswordEncoder.encode(usuarioInserirDTO.getSenha()));
 		usuario = usuarioRepository.save(usuario);
+		mailConfig.enviarEmail(usuarioInserirDTO.getEmail(), "Cadastro de Usuário!", usuario.toString());
 		return new UsuarioMostrarDTO (usuario);
 	}
 }
