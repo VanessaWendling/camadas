@@ -1,42 +1,44 @@
 package br.org.serratec.backend.model;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Embeddable
 public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "id_endereco")
+	@Column(name = "id_endereco")
 	private Long id;
 	
 	private String cep;
-	private String logradouro;
-	private String complemento;
+	private String rua;
+	private String numero;
 	private String bairro;
-	private String localidade;
-	private String uf;
-	private Long ibge;
+	private String cidade;
+	private String complemento;
+	private String estado;
 	
 	public Endereco() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Endereco(Long id, String cep, String logradouro, String complemento, String bairro, String localidade,
-			String uf, Long ibge) {
+	
+	public Endereco(Long id, String cep, String rua, String numero, String bairro, String cidade, String complemento,
+			String estado) {
 		super();
 		this.id = id;
 		this.cep = cep;
-		this.logradouro = logradouro;
-		this.complemento = complemento;
+		this.rua = rua;
+		this.numero = numero;
 		this.bairro = bairro;
-		this.localidade = localidade;
-		this.uf = uf;
-		this.ibge = ibge;
+		this.cidade = cidade;
+		this.complemento = complemento;
+		this.estado = estado;
 	}
+
+	
 
 	public Long getId() {
 		return id;
@@ -54,20 +56,20 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public String getRua() {
+		return rua;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
-	public String getComplemento() {
-		return complemento;
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public String getBairro() {
@@ -78,28 +80,28 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 
-	public String getLocalidade() {
-		return localidade;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setLocalidade(String localidade) {
-		this.localidade = localidade;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
-	public String getUf() {
-		return uf;
+	public String getComplemento() {
+		return complemento;
 	}
 
-	public void setUf(String uf) {
-		this.uf = uf;
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
-	public Long getIbge() {
-		return ibge;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setIbge(Long ibge) {
-		this.ibge = ibge;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -126,6 +128,4 @@ public class Endereco {
 			return false;
 		return true;
 	}
-	
-	
 }
