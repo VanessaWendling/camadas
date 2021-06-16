@@ -1,7 +1,7 @@
 package br.org.serratec.backend.dto;
 
 import br.org.serratec.backend.model.Endereco;
-
+// projeto camadas
 public class EnderecoMostrarDTO {
 
 	private String cep;
